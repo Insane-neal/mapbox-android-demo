@@ -9,13 +9,13 @@ import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionBase;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillExtrusionHeight;
@@ -52,9 +52,9 @@ public class Indoor3DMapActivity extends AppCompatActivity {
 
         FillExtrusionLayer roomExtrusionLayer = new FillExtrusionLayer("room-extrusion", "room-data");
         roomExtrusionLayer.setProperties(
-          fillExtrusionColor(Expression.get("color")),
-          fillExtrusionHeight(Expression.get("height")),
-          fillExtrusionBase(Expression.get("base_height")),
+          fillExtrusionColor(get("color")),
+          fillExtrusionHeight(get("height")),
+          fillExtrusionBase(get("base_height")),
           fillExtrusionOpacity(0.5f)
         );
 

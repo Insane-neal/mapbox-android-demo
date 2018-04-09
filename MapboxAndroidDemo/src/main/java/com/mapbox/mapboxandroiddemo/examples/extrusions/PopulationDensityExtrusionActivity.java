@@ -15,7 +15,6 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
-import com.mapbox.mapboxsdk.style.expressions.Expression;
 import com.mapbox.mapboxsdk.style.layers.FillExtrusionLayer;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.sources.VectorSource;
@@ -26,6 +25,7 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.exponential;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.interpolate;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
+import static com.mapbox.mapboxsdk.style.expressions.Expression.lt;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.lte;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.stop;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
@@ -69,7 +69,7 @@ public class PopulationDensityExtrusionActivity extends AppCompatActivity implem
   private void addFillsLayer() {
     FillLayer fillsLayer = new FillLayer("fills", "population");
     fillsLayer.setSourceLayer("outgeojson");
-    fillsLayer.setFilter(all(Expression.lt(get("pkm2"), literal(300000))));
+    fillsLayer.setFilter(all(lt(get("pkm2"), literal(300000))));
     fillsLayer.withProperties(
       fillColor(interpolate(exponential(1f), get("pkm2"),
         stop(0, color(Color.parseColor("#160e23"))),
